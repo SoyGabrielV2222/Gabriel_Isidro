@@ -13,16 +13,31 @@
     <style>
         body { font-family: 'Inter', sans-serif; color: #37352f; }
         .notion-bg { background-color: #ffffff; }
-        .notion-card:hover { background-color: #f7f6f3; }
-        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Estilo para ocultar la flecha por defecto de details */
         summary::-webkit-details-marker { display: none; }
         summary { list-style: none; }
+
+        /* Ocultar elementos según el idioma activo */
+        [lang-content] { display: none; }
+        body.lang-es [lang-content="es"] { display: block; }
+        body.lang-en [lang-content="en"] { display: block; }
+        
+        /* Inline display para elementos pequeños */
+        body.lang-es span[lang-content="es"], body.lang-es a[lang-content="es"] { display: inline-flex; }
+        body.lang-en span[lang-content="en"], body.lang-en a[lang-content="en"] { display: inline-flex; }
     </style>
 </head>
-<body class="notion-bg">
+<body class="notion-bg lang-es">
+
+    <!-- Selector de Idioma Flotante -->
+    <div class="fixed top-6 right-6 z-50">
+        <div class="bg-white/80 backdrop-blur-md border border-gray-200 rounded-full p-1 shadow-lg flex gap-1">
+            <button onclick="setLanguage('es')" id="btn-es" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#37352f] text-white">ES</button>
+            <button onclick="setLanguage('en')" id="btn-en" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]">EN</button>
+        </div>
+    </div>
 
     <div id="app">
         <!-- Banner Superior -->
@@ -31,141 +46,133 @@
         <div class="max-w-4xl mx-auto px-6 pb-20">
             <!-- Cabecera de Perfil -->
             <div class="relative -mt-16 mb-12">
-                <div class="w-32 h-32 bg-white rounded-3xl border-4 border-white shadow-sm overflow-hidden flex items-center justify-center text-6xl">
-                    👨‍🏫
+                <div class="w-32 h-32 bg-white rounded-3xl border-4 border-white shadow-md overflow-hidden flex items-center justify-center">
+                    <img 
+                        src="https://ui-avatars.com/api/?name=Gabriel+Isidro&background=f1f5f9&color=37352f&size=128" 
+                        alt="Foto de Perfil" 
+                        class="w-full h-full object-cover"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="hidden w-full h-full bg-gray-100 items-center justify-center text-4xl">👨‍🔬</div>
                 </div>
+
                 <div class="mt-6">
-                    <h1 class="text-4xl font-bold tracking-tight text-[#37352f]" id="prof-name">Q. Gabriel Isidro Velasco</h1>
-                    <p class="text-xl text-gray-500 mt-2">Estudiante de Maestría en Ciencias Químicas</p>
+                    <h1 class="text-4xl font-bold tracking-tight text-[#37352f]">Q. Gabriel Isidro Velasco</h1>
+                    <p class="text-xl text-gray-500 mt-2">
+                        <span lang-content="es">Estudiante de Maestría en Ciencias Químicas</span>
+                        <span lang-content="en">MSc Student in Chemical Sciences</span>
+                    </p>
                 </div>
+                
                 <div class="flex flex-wrap gap-5 mt-6 text-sm text-gray-500">
-                    <div class="flex items-center gap-2 font-medium"><i data-lucide="map-pin" class="w-4 h-4"></i> Ciudad de México, México</div>
-                    <div class="flex items-center gap-2 font-medium"><i data-lucide="mail" class="w-4 h-4"></i> gab_isivel@hotmail.com</div>
-                    <a href="#" class="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
+                    <div class="flex items-center gap-2 font-medium"><i data-lucide="map-pin" class="w-4 h-4"></i> Ciudad de México, MX</div>
+                    <div class="flex items-center gap-2 font-medium"><i data-lucide="mail" class="w-4 h-4"></i> correo@ejemplo.com</div>
+                    <a href="#" target="_blank" class="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
                         <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
-                    </a>
-                    <a href="#" class="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                        <i data-lucide="graduation-cap" class="w-4 h-4"></i> Google Scholar
                     </a>
                 </div>
             </div>
 
             <!-- Sobre mí -->
-            <section class="mb-16">
-                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">Sobre mí</h2>
-                <p class="text-lg leading-relaxed text-gray-700 max-w-3xl">
-                    Especialista en metodologías de enseñanza activa y análisis de datos en educación. Mi enfoque combina la investigación teórica con la implementación práctica en el aula para mejorar los procesos de aprendizaje mediante tecnología y ciencia de datos.
-                </p>
+            <section class="mb-16 animate-fade-in">
+                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">
+                    <span lang-content="es">Sobre mí</span>
+                    <span lang-content="en">About me</span>
+                </h2>
+                <div class="text-lg leading-relaxed text-gray-700 max-w-3xl">
+                    <p lang-content="es">
+                        Químico enfocado en la investigación de [Tu área de especialidad]. Actualmente desarrollo mi tesis de maestría explorando [Breve descripción de tu investigación]. Interesado en la ciencia de materiales y síntesis orgánica.
+                    </p>
+                    <p lang-content="en">
+                        Chemist focused on research in [Your specialty area]. Currently developing my master's thesis exploring [Brief description of your research]. Interested in materials science and organic synthesis.
+                    </p>
+                </div>
             </section>
 
-            <!-- SECCIÓN DE INVESTIGACIÓN -->
-            <section class="mb-12">
+            <!-- INVESTIGACIÓN -->
+            <section class="mb-12 animate-fade-in">
                 <div class="flex items-center gap-3 mb-6 text-gray-400">
                     <i data-lucide="book-open" class="w-5 h-5"></i>
-                    <h2 class="text-xs font-bold uppercase tracking-[0.2em]">Investigación</h2>
+                    <h2 class="text-xs font-bold uppercase tracking-[0.2em]">
+                        <span lang-content="es">Investigación</span>
+                        <span lang-content="en">Research</span>
+                    </h2>
                 </div>
                 
                 <div class="space-y-3">
-                    <!-- Tema con Introducción (Acordeón) -->
                     <details class="group border border-gray-100 rounded-2xl overflow-hidden bg-white hover:border-gray-200 transition-all shadow-sm">
                         <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
                             <div class="flex items-center gap-4">
-                                <div class="p-3 bg-blue-50 text-blue-500 rounded-xl">
-                                    <i data-lucide="info" class="w-5 h-5"></i>
-                                </div>
+                                <div class="p-3 bg-blue-50 text-blue-500 rounded-xl"><i data-lucide="flask-conical" class="w-5 h-5"></i></div>
                                 <div>
-                                    <h3 class="font-bold text-[#37352f]">Impacto de la IA en la Educación Superior</h3>
-                                    <p class="text-xs text-gray-400 mt-1 flex items-center gap-2">
-                                        2024 • Publicación Q1 • <span class="text-blue-500 font-medium">Ver introducción</span>
+                                    <h3 class="font-bold text-[#37352f]">
+                                        <span lang-content="es">Proyecto de Tesis de Maestría</span>
+                                        <span lang-content="en">Master's Thesis Project</span>
+                                    </h3>
+                                    <p class="text-xs text-gray-400 mt-1">
+                                        <span lang-content="es">En curso • Ver detalles</span>
+                                        <span lang-content="en">In progress • See details</span>
                                     </p>
                                 </div>
                             </div>
                             <i data-lucide="chevron-down" class="w-5 h-5 text-gray-300 group-open:rotate-180 transition-transform"></i>
                         </summary>
-                        <div class="p-8 bg-[#fcfcfb] border-t border-gray-50 animate-fade-in">
-                            <h4 class="text-sm font-bold uppercase text-blue-500 mb-3 tracking-wider">Introducción al tema</h4>
-                            <p class="text-gray-700 leading-relaxed mb-6 text-lg">
-                                La IA Generativa ha transformado la forma en que los estudiantes producen contenido. Este tema explora si la IA es una amenaza a la integridad académica o una herramienta de apoyo pedagógico. Analizamos el uso de modelos como GPT-4 en entornos universitarios y su impacto en la evaluación tradicional.
+                        <div class="p-8 bg-[#fcfcfb] border-t border-gray-50">
+                            <p lang-content="es" class="text-gray-700 leading-relaxed mb-6">
+                                Descripción detallada de tu investigación en español. Explica tus objetivos y metodología aquí.
                             </p>
-                            <div class="flex flex-wrap gap-3">
-                                <a href="#" class="inline-flex items-center gap-2 bg-[#37352f] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-black transition-all shadow-md shadow-gray-200">
-                                    <i data-lucide="download" class="w-4 h-4"></i> Descargar Documento
-                                </a>
-                                <a href="#" class="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Ver DOI
+                            <p lang-content="en" class="text-gray-700 leading-relaxed mb-6">
+                                Detailed description of your research in English. Explain your objectives and methodology here.
+                            </p>
+                            <div class="flex gap-3">
+                                <a href="#" class="inline-flex items-center gap-2 bg-[#37352f] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-black transition-all">
+                                    <i data-lucide="file-text" class="w-4 h-4"></i> 
+                                    <span lang-content="es">Protocolo</span><span lang-content="en">Protocol</span>
                                 </a>
                             </div>
                         </div>
                     </details>
-
-                    <!-- Tema Simple -->
-                    <div class="p-5 border border-gray-100 rounded-2xl flex items-center justify-between hover:border-gray-200 hover:bg-[#fcfcfb] transition-all shadow-sm">
-                        <div class="flex items-center gap-4">
-                            <div class="p-3 bg-blue-50 text-blue-500 rounded-xl"><i data-lucide="file-text" class="w-5 h-5"></i></div>
-                            <div>
-                                <h3 class="font-bold text-[#37352f]">Análisis de Datos en Python para Educadores</h3>
-                                <p class="text-xs text-gray-400 mt-1">2023 • Repositorio Open Source</p>
-                            </div>
-                        </div>
-                        <a href="#" class="p-2 text-gray-300 hover:text-blue-600 transition-colors"><i data-lucide="download" class="w-5 h-5"></i></a>
-                    </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN DE DOCENCIA -->
-            <section class="mb-12">
-                <div class="flex items-center gap-3 mb-6 text-gray-400">
-                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-                    <h2 class="text-xs font-bold uppercase tracking-[0.2em]">Docencia</h2>
-                </div>
-                
-                <div class="space-y-3">
-                    <div class="p-5 border border-gray-100 rounded-2xl flex items-center justify-between hover:border-gray-200 hover:bg-[#fcfcfb] transition-all shadow-sm">
-                        <div class="flex items-center gap-4">
-                            <div class="p-3 bg-orange-50 text-orange-500 rounded-xl"><i data-lucide="folder-open" class="w-5 h-5"></i></div>
-                            <div>
-                                <h3 class="font-bold italic text-[#37352f]">Sílaba: Metodología de la Investigación</h3>
-                                <p class="text-xs text-gray-400 mt-1">2023 • Programa y Lecturas Sugeridas</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                             <a href="#" class="p-2 text-gray-300 hover:text-orange-600 transition-colors" title="Descargar"><i data-lucide="download" class="w-5 h-5"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="p-5 border border-gray-100 rounded-2xl flex items-center justify-between hover:border-gray-200 hover:bg-[#fcfcfb] transition-all shadow-sm text-gray-400 italic">
-                        <div class="flex items-center gap-4">
-                            <div class="p-3 bg-gray-50 text-gray-300 rounded-xl"><i data-lucide="plus" class="w-5 h-5"></i></div>
-                            <span class="text-sm">Más materiales próximamente...</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer / Contacto Final -->
+            <!-- Footer -->
             <footer class="mt-24 p-12 rounded-[2rem] bg-[#f7f6f3] border border-gray-100 text-center">
-                <div class="inline-flex p-4 bg-white rounded-2xl shadow-sm mb-6">
-                    <i data-lucide="mail" class="w-8 h-8 text-[#37352f]"></i>
-                </div>
-                <h2 class="text-3xl font-bold mb-3 text-[#37352f]">¿Hablamos?</h2>
-                <p class="text-gray-500 mb-8 max-w-md mx-auto">Estoy disponible para tutorías, colaboraciones en investigación o revisión de pares.</p>
-                <a href="mailto:correo@ejemplo.com" class="inline-flex items-center gap-3 bg-[#37352f] text-white px-10 py-4 rounded-2xl font-bold hover:bg-black hover:scale-[1.02] transition-all shadow-xl shadow-gray-200">
-                    Enviar mensaje directo
+                <h2 class="text-3xl font-bold mb-3 text-[#37352f]">
+                    <span lang-content="es">Contacto</span>
+                    <span lang-content="en">Contact</span>
+                </h2>
+                <p class="text-gray-500 mb-8 max-w-md mx-auto">
+                    <span lang-content="es">¿Te interesa colaborar o conocer más sobre mi trabajo?</span>
+                    <span lang-content="en">Interested in collaborating or learning more about my work?</span>
+                </p>
+                <a href="mailto:correo@ejemplo.com" class="inline-flex items-center gap-3 bg-[#37352f] text-white px-10 py-4 rounded-2xl font-bold hover:bg-black transition-all shadow-xl shadow-gray-200">
+                    <span lang-content="es">Enviar correo</span>
+                    <span lang-content="en">Send email</span>
                 </a>
-                <div class="mt-12 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    © 2025 • Dr. Gabriel Rodríguez • Personal Academic Home
-                </div>
             </footer>
         </div>
     </div>
 
     <script>
-        // Inicializar iconos de Lucide al cargar la página
+        function setLanguage(lang) {
+            document.body.className = 'notion-bg lang-' + lang;
+            
+            // Actualizar botones
+            const btnEs = document.getElementById('btn-es');
+            const btnEn = document.getElementById('btn-en');
+            
+            if(lang === 'es') {
+                btnEs.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#37352f] text-white';
+                btnEn.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]';
+            } else {
+                btnEn.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#37352f] text-white';
+                btnEs.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]';
+            }
+        }
+
         window.addEventListener('load', function() {
             lucide.createIcons();
         });
     </script>
 </body>
-
 </html>
-
