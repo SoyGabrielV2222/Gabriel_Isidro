@@ -4,151 +4,269 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Profesional | Q. Gabriel Isidro Velasco</title>
-    <!-- Tailwind CSS para el diseño -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; color: #37352f; }
+        body { font-family: 'Inter', sans-serif; color: #37352f; scroll-behavior: smooth; }
         .notion-bg { background-color: #ffffff; }
-        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        summary::-webkit-details-marker { display: none; }
-        summary { list-style: none; }
-
-        /* Ocultar elementos según el idioma activo */
         [lang-content] { display: none; }
         body.lang-es [lang-content="es"] { display: block; }
         body.lang-en [lang-content="en"] { display: block; }
+        body.lang-es span[lang-content="es"], body.lang-es a[lang-content="es"], body.lang-es div[lang-content="es"] { display: inline-flex; }
+        body.lang-en span[lang-content="en"], body.lang-en a[lang-content="en"], body.lang-en div[lang-content="en"] { display: inline-flex; }
         
-        /* Inline display para elementos pequeños */
-        body.lang-es span[lang-content="es"], body.lang-es a[lang-content="es"] { display: inline-flex; }
-        body.lang-en span[lang-content="en"], body.lang-en a[lang-content="en"] { display: inline-flex; }
+        .banner-pattern { background-color: #f8fafc; background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px); background-size: 30px 30px; }
+        .brand-siia { color: #1e3a8a; }
+        .brand-linkedin { color: #0077B5; }
+        .brand-orcid { color: #A6CE39; }
+        
+        .card-notion { border: 1px solid #efefef; transition: all 0.2s ease; }
+        .card-notion:hover { border-color: #e5e7eb; background-color: #fcfcfb; }
+        
+        /* Línea de tiempo */
+        .timeline-border { border-left: 2px solid #e5e7eb; margin-left: 20px; }
+        .timeline-dot { position: relative; }
+        .timeline-dot::before { 
+            content: ''; 
+            position: absolute; 
+            left: -29px; 
+            top: 4px; 
+            width: 16px; 
+            height: 16px; 
+            background: white; 
+            border: 3px solid #3b82f6; 
+            border-radius: 50%; 
+        }
+        
+        /* Estilo para los acordeones */
+        details summary::-webkit-details-marker { display: none; }
+        details[open] > summary i[data-lucide="chevron-right"] { transform: rotate(90deg); }
+        details[open] > summary i[data-lucide="plus"] { transform: rotate(45deg); }
     </style>
 </head>
 <body class="notion-bg lang-es">
 
-    <!-- Selector de Idioma Flotante -->
+    <!-- SELECTOR DE IDIOMA -->
     <div class="fixed top-6 right-6 z-50">
-        <div class="bg-white/80 backdrop-blur-md border border-gray-200 rounded-full p-1 shadow-lg flex gap-1">
-            <button onclick="setLanguage('es')" id="btn-es" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#37352f] text-white">ES</button>
-            <button onclick="setLanguage('en')" id="btn-en" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]">EN</button>
+        <div class="bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl p-1 shadow-lg flex gap-1">
+            <button onclick="setLanguage('es')" id="btn-es" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#37352f] text-white shadow-sm">ES</button>
+            <button onclick="setLanguage('en')" id="btn-en" class="px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]">EN</button>
         </div>
     </div>
 
     <div id="app">
-        <!-- Banner Superior -->
-        <div class="h-48 w-full bg-gradient-to-r from-slate-100 to-slate-200 border-b border-gray-100"></div>
+        <!-- BANNER -->
+        <div class="h-64 w-full banner-pattern border-b border-gray-100 flex items-end justify-center"></div>
 
-        <div class="max-w-4xl mx-auto px-6 pb-20">
-            <!-- Cabecera de Perfil -->
-            <div class="relative -mt-16 mb-12">
-                <div class="w-32 h-32 bg-white rounded-3xl border-4 border-white shadow-md overflow-hidden flex items-center justify-center">
-                    <img 
-                        src="https://ui-avatars.com/api/?name=Gabriel+Isidro&background=f1f5f9&color=37352f&size=128" 
-                        alt="Foto de Perfil" 
-                        class="w-full h-full object-cover"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="hidden w-full h-full bg-gray-100 items-center justify-center text-4xl">👨‍🔬</div>
+        <div class="max-w-4xl mx-auto px-6 pb-24">
+            
+            <!-- ENCABEZADO PERFIL -->
+            <div class="relative -mt-20 mb-16">
+                <div class="w-40 h-40 bg-white rounded-[2.5rem] border-8 border-white shadow-xl overflow-hidden flex items-center justify-center">
+                    <img src="https://ui-avatars.com/api/?name=Gabriel+Isidro&background=f8fafc&color=37352f&size=256" alt="Profile" class="w-full h-full object-cover">
                 </div>
 
-                <div class="mt-6">
-                    <h1 class="text-4xl font-bold tracking-tight text-[#37352f]">Q. Gabriel Isidro Velasco</h1>
-                    <p class="text-xl text-gray-500 mt-2">
-                        <span lang-content="es">Estudiante de Maestría en Ciencias Químicas</span>
-                        <span lang-content="en">MSc Student in Chemical Sciences</span>
-                    </p>
-                </div>
-                
-                <div class="flex flex-wrap gap-5 mt-6 text-sm text-gray-500">
-                    <div class="flex items-center gap-2 font-medium"><i data-lucide="map-pin" class="w-4 h-4"></i> Ciudad de México, MX</div>
-                    <div class="flex items-center gap-2 font-medium"><i data-lucide="mail" class="w-4 h-4"></i> correo@ejemplo.com</div>
-                    <a href="#" target="_blank" class="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                        <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
-                    </a>
+                <div class="mt-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                    <div>
+                        <h1 class="text-5xl font-extrabold tracking-tight text-[#37352f]">Q. Gabriel Isidro Velasco</h1>
+                        <p class="text-2xl text-gray-500 mt-3 font-medium">
+                            <span lang-content="es">Estudiante de Maestría en Ciencias Químicas</span>
+                            <span lang-content="en">MSc Student in Chemical Sciences</span>
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <a href="https://web.siia.unam.mx/siia-publico/c/busqueda_individual.php?id=173899" target="_blank" class="social-btn p-4 bg-white border border-gray-100 rounded-2xl group" title="SIIA"><svg class="w-7 h-7 brand-siia fill-current" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 11-6-11-6zm0 18l-11-6 1.5-1 9.5 5 9.5-5 1.5 1-11 6zm0-5l-11-6 1.5-1 9.5 5 9.5-5 1.5 1-11 6z"/></svg></a>
+                        <a href="#" class="social-btn p-4 bg-white border border-gray-100 rounded-2xl group" title="LinkedIn"><svg class="w-7 h-7 brand-linkedin fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        <a href="https://orcid.org/0009-0006-1181-9486" target="_blank" class="social-btn p-4 bg-white border border-gray-100 rounded-2xl group" title="ORCID"><svg class="w-7 h-7 brand-orcid fill-current" viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.541 0 .942.428.942.942 0 .513-.401.942-.942.942-.541 0-.942-.428-.942-.942 0-.513.401-.942.942-.942zM8.331 7.218h-1.924v11.312h1.924V7.218zm9.578 5.656c0 3.332-2.325 5.656-5.656 5.656H10.13V7.218h2.123c3.331 0 5.656 2.324 5.656 5.656zm-1.924 0c0-2.223-1.538-3.761-3.761-3.761H12.05v7.522h.274c2.223 0 3.761-1.538 3.761-3.761z"/></svg></a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Sobre mí -->
-            <section class="mb-16 animate-fade-in">
-                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">
-                    <span lang-content="es">Sobre mí</span>
-                    <span lang-content="en">About me</span>
+            <!-- PERFIL -->
+            <section class="mb-20">
+                <h2 class="text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-6 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-gray-200"></span>
+                    <span lang-content="es">Perfil Profesional</span>
+                    <span lang-content="en">Professional Profile</span>
                 </h2>
-                <div class="text-lg leading-relaxed text-gray-700 max-w-3xl">
-                    <p lang-content="es">
-                        Químico enfocado en la investigación de [Tu área de especialidad]. Actualmente desarrollo mi tesis de maestría explorando [Breve descripción de tu investigación]. Interesado en la ciencia de materiales y síntesis orgánica.
-                    </p>
-                    <p lang-content="en">
-                        Chemist focused on research in [Your specialty area]. Currently developing my master's thesis exploring [Brief description of your research]. Interested in materials science and organic synthesis.
-                    </p>
+                <div class="text-xl leading-relaxed text-gray-700">
+                    <p lang-content="es">Químico apasionado por la investigación y la docencia, actualmente enfocado en estudios de posgrado en Ciencias Químicas. Mi trayectoria combina el rigor analítico en laboratorio con el desarrollo de recursos académicos para la formación de nuevos profesionales.</p>
+                    <p lang-content="en">Chemist passionate about research and teaching, currently focused on graduate studies in Chemical Sciences. My career combines analytical laboratory rigor with the development of academic resources for the training of new professionals.</p>
+                </div>
+            </section>
+
+            <!-- ACTIVIDAD PROFESIONAL (RESTAURADA) -->
+            <section class="mb-20">
+                <div class="flex items-center gap-3 mb-8 text-gray-800">
+                    <i data-lucide="briefcase" class="w-6 h-6 text-blue-600"></i>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">
+                        <span lang-content="es">Actividad Profesional</span>
+                        <span lang-content="en">Work Experience</span>
+                    </h2>
+                </div>
+
+                <div class="timeline-border space-y-12">
+                    <!-- Ítem 1 -->
+                    <div class="timeline-dot">
+                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">2023 - Presente</span>
+                        <h3 class="text-xl font-extrabold text-[#37352f]">Estudiante de Maestría</h3>
+                        <p class="text-gray-500 font-medium">UNAM • Facultad de Química</p>
+                        <p class="mt-3 text-gray-600 leading-relaxed" lang-content="es">Investigación enfocada en química analítica y síntesis orgánica avanzada.</p>
+                        <p class="mt-3 text-gray-600 leading-relaxed" lang-content="en">Research focused on analytical chemistry and advanced organic synthesis.</p>
+                    </div>
+
+                    <!-- Ítem 2 -->
+                    <div class="timeline-dot">
+                        <span class="text-xs font-bold text-gray-400 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">2021 - 2023</span>
+                        <h3 class="text-xl font-extrabold text-[#37352f]">Ayudante de Profesor</h3>
+                        <p class="text-gray-500 font-medium">UNAM • Departamento de Química Analítica</p>
+                        <p class="mt-3 text-gray-600 leading-relaxed" lang-content="es">Apoyo en la impartición de laboratorios y elaboración de guías didácticas.</p>
+                        <p class="mt-3 text-gray-600 leading-relaxed" lang-content="en">Support in laboratory teaching and development of educational guides.</p>
+                    </div>
                 </div>
             </section>
 
             <!-- INVESTIGACIÓN -->
-            <section class="mb-12 animate-fade-in">
-                <div class="flex items-center gap-3 mb-6 text-gray-400">
-                    <i data-lucide="book-open" class="w-5 h-5"></i>
-                    <h2 class="text-xs font-bold uppercase tracking-[0.2em]">
+            <section class="mb-20">
+                <div class="flex items-center gap-3 mb-8 text-gray-800">
+                    <i data-lucide="flask-conical" class="w-6 h-6 text-emerald-600"></i>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">
                         <span lang-content="es">Investigación</span>
                         <span lang-content="en">Research</span>
                     </h2>
                 </div>
                 
-                <div class="space-y-3">
-                    <details class="group border border-gray-100 rounded-2xl overflow-hidden bg-white hover:border-gray-200 transition-all shadow-sm">
-                        <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center gap-4">
-                                <div class="p-3 bg-blue-50 text-blue-500 rounded-xl"><i data-lucide="flask-conical" class="w-5 h-5"></i></div>
-                                <div>
-                                    <h3 class="font-bold text-[#37352f]">
-                                        <span lang-content="es">Proyecto de Tesis de Maestría</span>
-                                        <span lang-content="en">Master's Thesis Project</span>
-                                    </h3>
-                                    <p class="text-xs text-gray-400 mt-1">
-                                        <span lang-content="es">En curso • Ver detalles</span>
-                                        <span lang-content="en">In progress • See details</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-300 group-open:rotate-180 transition-transform"></i>
-                        </summary>
-                        <div class="p-8 bg-[#fcfcfb] border-t border-gray-50">
-                            <p lang-content="es" class="text-gray-700 leading-relaxed mb-6">
-                                Descripción detallada de tu investigación en español. Explica tus objetivos y metodología aquí.
-                            </p>
-                            <p lang-content="en" class="text-gray-700 leading-relaxed mb-6">
-                                Detailed description of your research in English. Explain your objectives and methodology here.
-                            </p>
-                            <div class="flex gap-3">
-                                <a href="#" class="inline-flex items-center gap-2 bg-[#37352f] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-black transition-all">
-                                    <i data-lucide="file-text" class="w-4 h-4"></i> 
-                                    <span lang-content="es">Protocolo</span><span lang-content="en">Protocol</span>
-                                </a>
+                <div class="space-y-4">
+                    <div class="card-notion p-5 rounded-2xl flex items-center justify-between">
+                        <div class="flex gap-4">
+                            <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="file-text" class="w-5 h-5"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">
+                                    <span lang-content="es">Síntesis de Compuestos de Coordinación</span>
+                                    <span lang-content="en">Synthesis of Coordination Compounds</span>
+                                </h4>
+                                <p class="text-sm text-gray-500">Publicación en revisión • 2024</p>
                             </div>
                         </div>
-                    </details>
+                        <a href="#" class="p-2 text-gray-300 hover:text-emerald-600"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
                 </div>
             </section>
 
-            <!-- Footer -->
-            <footer class="mt-24 p-12 rounded-[2rem] bg-[#f7f6f3] border border-gray-100 text-center">
-                <h2 class="text-3xl font-bold mb-3 text-[#37352f]">
-                    <span lang-content="es">Contacto</span>
-                    <span lang-content="en">Contact</span>
-                </h2>
-                <p class="text-gray-500 mb-8 max-w-md mx-auto">
-                    <span lang-content="es">¿Te interesa colaborar o conocer más sobre mi trabajo?</span>
-                    <span lang-content="en">Interested in collaborating or learning more about my work?</span>
-                </p>
-                <a href="mailto:correo@ejemplo.com" class="inline-flex items-center gap-3 bg-[#37352f] text-white px-10 py-4 rounded-2xl font-bold hover:bg-black transition-all shadow-xl shadow-gray-200">
-                    <span lang-content="es">Enviar correo</span>
-                    <span lang-content="en">Send email</span>
+            <!-- MATERIAL DIDÁCTICO (ACORDEONES) -->
+            <section class="mb-20">
+                <div class="flex items-center gap-3 mb-8 text-gray-800">
+                    <i data-lucide="library" class="w-6 h-6 text-indigo-600"></i>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em]">
+                        <span lang-content="es">Material Didáctico</span>
+                        <span lang-content="en">Educational Material</span>
+                    </h2>
+                </div>
+
+                <div class="space-y-6">
+                    
+                    <!-- ACORDEÓN: QUÍMICA ANALÍTICA -->
+                    <details class="group bg-white border border-gray-100 rounded-[2.5rem] shadow-sm overflow-hidden" open>
+                        <summary class="p-8 flex items-center justify-between cursor-pointer hover:bg-gray-50/50 transition-all">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100">
+                                    <i data-lucide="microscope" class="w-7 h-7"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-900 leading-none">Química Analítica</h3>
+                                    <p class="text-sm text-gray-400 mt-2 font-medium">Recursos de Equilibrio Químico</p>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-300 group-open:text-indigo-600 group-open:border-indigo-100 transition-all">
+                                <i data-lucide="chevron-right" class="w-5 h-5 transition-transform duration-300"></i>
+                            </div>
+                        </summary>
+
+                        <div class="p-6 pt-0 space-y-3 bg-white">
+                            <div class="bg-gray-50/50 rounded-[2rem] p-4 space-y-3 border border-gray-50">
+                                
+                                <!-- Subtema 1 -->
+                                <details class="bg-white rounded-2xl border border-gray-100 overflow-hidden group/sub">
+                                    <summary class="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-all">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-indigo-50 text-indigo-500 rounded-lg flex items-center justify-center"><i data-lucide="scale" class="w-4 h-4"></i></div>
+                                            <span class="font-bold text-gray-700 text-sm">1. Equilibrio Químico</span>
+                                        </div>
+                                        <i data-lucide="plus" class="w-4 h-4 text-gray-300 group-open/sub:text-indigo-500 transition-transform duration-300"></i>
+                                    </summary>
+                                    <div class="p-4 border-t border-gray-50 space-y-2">
+                                        <a href="#" class="flex items-center justify-between p-3 border border-dashed border-gray-200 rounded-xl hover:border-indigo-300 hover:bg-indigo-50/30 transition-all group/item">
+                                            <span class="text-sm text-gray-500 group-hover/item:text-indigo-600">Fundamentos_Equilibrio.pdf</span>
+                                            <i data-lucide="download" class="w-4 h-4 text-gray-300 group-hover/item:text-indigo-400"></i>
+                                        </a>
+                                    </div>
+                                </details>
+
+                                <!-- Otros subtemas (Resumidos para brevedad) -->
+                                <details class="bg-white rounded-2xl border border-gray-100 overflow-hidden group/sub">
+                                    <summary class="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-all">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-rose-50 text-rose-500 rounded-lg flex items-center justify-center"><i data-lucide="droplets" class="w-4 h-4"></i></div>
+                                            <span class="font-bold text-gray-700 text-sm">3. Equilibrios Ácido-Base</span>
+                                        </div>
+                                        <i data-lucide="plus" class="w-4 h-4 text-gray-300 transition-transform"></i>
+                                    </summary>
+                                </details>
+
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- ACORDEÓN: QUÍMICA GENERAL (PLANTILLA) -->
+                    <details class="group bg-white border border-gray-100 rounded-[2.5rem] shadow-sm overflow-hidden">
+                        <summary class="p-8 flex items-center justify-between cursor-pointer hover:bg-gray-50/50 transition-all">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-gray-100 text-gray-400 rounded-2xl flex items-center justify-center">
+                                    <i data-lucide="beaker" class="w-7 h-7"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-900 leading-none">Química General</h3>
+                                    <p class="text-sm text-gray-400 mt-2 font-medium">Contenido en desarrollo</p>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-300">
+                                <i data-lucide="chevron-right" class="w-5 h-5 transition-transform duration-300"></i>
+                            </div>
+                        </summary>
+                        <div class="p-12 text-center text-gray-400 italic">Los documentos se añadirán próximamente.</div>
+                    </details>
+
+                    <!-- ACORDEÓN: MATEMÁTICAS (PLANTILLA) -->
+                    <details class="group bg-white border border-gray-100 rounded-[2.5rem] shadow-sm overflow-hidden">
+                        <summary class="p-8 flex items-center justify-between cursor-pointer hover:bg-gray-50/50 transition-all">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-gray-100 text-gray-400 rounded-2xl flex items-center justify-center">
+                                    <i data-lucide="calculator" class="w-7 h-7"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-900 leading-none">Matemáticas</h3>
+                                    <p class="text-sm text-gray-400 mt-2 font-medium">Contenido en desarrollo</p>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-300">
+                                <i data-lucide="chevron-right" class="w-5 h-5 transition-transform duration-300"></i>
+                            </div>
+                        </summary>
+                        <div class="p-12 text-center text-gray-400 italic">Los documentos se añadirán próximamente.</div>
+                    </details>
+
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="mt-24 p-12 rounded-[3rem] bg-[#f7f6f3] text-center border border-gray-100">
+                <h2 class="text-3xl font-extrabold mb-8 text-[#37352f]">¿Colaboramos?</h2>
+                <a href="mailto:gab_isivel@hotmail.com" class="inline-flex items-center gap-3 bg-[#37352f] text-white px-12 py-4 rounded-2xl font-bold hover:bg-black transition-all shadow-lg shadow-gray-200">
+                    <i data-lucide="mail" class="w-5 h-5"></i> Enviar correo
                 </a>
+                <p class="text-xs text-gray-400 mt-8 tracking-widest uppercase">© 2024 Gabriel Isidro Velasco</p>
             </footer>
         </div>
     </div>
@@ -156,23 +274,20 @@
     <script>
         function setLanguage(lang) {
             document.body.className = 'notion-bg lang-' + lang;
-            
-            // Actualizar botones
             const btnEs = document.getElementById('btn-es');
             const btnEn = document.getElementById('btn-en');
+            const active = 'bg-[#37352f] text-white shadow-sm';
+            const inactive = 'text-gray-400 hover:text-[#37352f]';
             
             if(lang === 'es') {
-                btnEs.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#37352f] text-white';
-                btnEn.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]';
+                btnEs.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all ' + active;
+                btnEn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all ' + inactive;
             } else {
-                btnEn.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#37352f] text-white';
-                btnEs.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-[#37352f]';
+                btnEn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all ' + active;
+                btnEs.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all ' + inactive;
             }
         }
-
-        window.addEventListener('load', function() {
-            lucide.createIcons();
-        });
+        window.addEventListener('load', () => lucide.createIcons());
     </script>
 </body>
 </html>
